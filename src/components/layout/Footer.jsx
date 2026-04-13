@@ -23,13 +23,13 @@ const Footer = () => {
               Empowering traders and investors with premium education and AI-powered insights. Join the elite fleet today.
             </p>
             <div className="flex items-center space-x-4">
-              <a href="#" className="p-2 bg-slate-100 dark:bg-slate-900 rounded-lg hover:text-brand-600 transition-colors">
+              <a href="https://www.instagram.com/finfleetacademy/" target="_blank" rel="noopener noreferrer" className="p-2 bg-slate-100 dark:bg-slate-900 rounded-lg hover:text-brand-600 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
               <a href="#" className="p-2 bg-slate-100 dark:bg-slate-900 rounded-lg hover:text-brand-600 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 bg-slate-100 dark:bg-slate-900 rounded-lg hover:text-brand-600 transition-colors">
+              <a href="https://x.com/finfleetacademy" target="_blank" rel="noopener noreferrer" className="p-2 bg-slate-100 dark:bg-slate-900 rounded-lg hover:text-brand-600 transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
             </div>

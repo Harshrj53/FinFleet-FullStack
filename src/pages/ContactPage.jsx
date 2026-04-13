@@ -71,13 +71,13 @@ const ContactPage = () => {
               <div className="mt-12">
                 <div className="text-sm font-bold dark:text-white mb-4">Follow Our Fleet</div>
                 <div className="flex space-x-4">
-                  <a href="#" className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl hover:text-brand-600 transition-colors border border-slate-100 dark:border-slate-800">
+                  <a href="https://www.instagram.com/finfleetacademy/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl hover:text-brand-600 transition-colors border border-slate-100 dark:border-slate-800">
                     <Instagram className="w-5 h-5" />
                   </a>
                   <a href="#" className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl hover:text-brand-600 transition-colors border border-slate-100 dark:border-slate-800">
                     <Linkedin className="w-5 h-5" />
                   </a>
-                  <a href="#" className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl hover:text-brand-600 transition-colors border border-slate-100 dark:border-slate-800">
+                  <a href="https://x.com/finfleetacademy" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl hover:text-brand-600 transition-colors border border-slate-100 dark:border-slate-800">
                     <Twitter className="w-5 h-5" />
                   </a>
                 </div>
