@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 import Coupon from '../models/Coupon.js';
 import Notification from '../models/Notification.js';
+import Subscriber from '../models/Subscriber.js';
 
 // ... (other controllers)
 
@@ -17,6 +18,15 @@ export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({}).select('-password');
     res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getAllSubscribers = async (req, res) => {
+  try {
+    const subscribers = await Subscriber.find({}).sort({ createdAt: -1 });
+    res.json(subscribers);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

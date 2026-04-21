@@ -5,7 +5,8 @@ import {
   getCoupons, 
   createCoupon, 
   deleteCoupon,
-  broadcastNotification
+  broadcastNotification,
+  getAllSubscribers
 } from '../controllers/adminController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -13,6 +14,7 @@ const router = express.Router();
 
 // User Management
 router.get('/users', protect, admin, getAllUsers);
+router.get('/subscribers', protect, admin, getAllSubscribers);
 router.put('/users/:id/plan', protect, admin, updateUserPlan);
 
 // Coupon Management

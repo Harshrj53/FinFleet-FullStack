@@ -11,6 +11,7 @@ const AdminDashboard = () => {
     addCoupon, 
     deleteCoupon,
     fetchUsers,
+    fetchSubscribers,
     fetchCoupons,
     adminSendNotification
   } = useAuth();
@@ -18,6 +19,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   const [usersList, setUsersList] = useState([]);
+  const [subscribersList, setSubscribersList] = useState([]);
   const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [couponCode, setCouponCode] = useState('');
@@ -29,12 +31,14 @@ const AdminDashboard = () => {
 
   const loadData = async () => {
     try {
-      const [users, allCoupons] = await Promise.all([
+      const [users, allCoupons, subscribers] = await Promise.all([
         fetchUsers(),
-        fetchCoupons()
+        fetchCoupons(),
+        fetchSubscribers()
       ]);
       setUsersList(users);
       setCoupons(allCoupons);
+      setSubscribersList(subscribers);
     } catch (error) {
       toast.error("Failed to fetch admin data");
     } finally {
@@ -221,6 +225,40 @@ const AdminDashboard = () => {
               </div>
             </div>
             
+            {/* Newsletter Subscribers */}
+            <div className="card-premium p-6">
+              <h3 className="text-xl font-bold dark:text-white flex items-center mb-6">
+                <Users className="w-5 h-5 mr-2 text-brand-600" />
+                Newsletter Subscribers
+              </h3>
+              <div className="overflow-x-auto max-h-80 overflow-y-auto pr-2">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-slate-200 dark:border-slate-800 text-sm text-slate-500">
+                      <th className="py-3 px-4 font-bold">Email</th>
+                      <th className="py-3 px-4 font-bold">Source</th>
+                      <th className="py-3 px-4 font-bold">Date Subscribed</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm">
+                    {subscribersList.length === 0 ? (
+                      <tr>
+                        <td colSpan="3" className="py-4 px-4 text-center text-slate-500">No subscribers found.</td>
+                      </tr>
+                    ) : (
+                      subscribersList.map((sub) => (
+                        <tr key={sub._id} className="border-b border-slate-100 dark:border-slate-800/50 hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
+                          <td className="py-3 px-4 font-bold dark:text-white">{sub.email}</td>
+                          <td className="py-3 px-4 uppercase text-xs font-bold text-slate-500">{sub.source}</td>
+                          <td className="py-3 px-4 text-slate-500">{new Date(sub.createdAt).toLocaleDateString()}</td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             {/* Notifications System */}
             <div className="card-premium p-6">
               <h3 className="text-xl font-bold dark:text-white flex items-center mb-6">

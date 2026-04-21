@@ -105,6 +105,11 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
+  const fetchSubscribers = async () => {
+    const { data } = await axios.get('/api/admin/subscribers');
+    return data;
+  };
+
   const fetchCoupons = async () => {
     const { data } = await axios.get('/api/admin/coupons');
     setCoupons(data);
@@ -175,6 +180,7 @@ export const AuthProvider = ({ children }) => {
       logout, 
       upgradePlan,
       fetchUsers,
+      fetchSubscribers,
       fetchCoupons,
       addCoupon,
       deleteCoupon,
