@@ -9,6 +9,7 @@ import courseRoutes from './routes/courseRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import subscriberRoutes from './routes/subscriberRoutes.js';
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/contacts', contactRoutes);
+app.use('/api/subscribers', subscriberRoutes);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/finfleet')

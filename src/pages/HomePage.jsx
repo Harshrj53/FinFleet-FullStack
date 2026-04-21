@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, ShieldCheck, Users, Award, BookOpen, MessageSquare, PlayCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const HomePage = () => {
   const containerVariants = {
@@ -15,6 +17,28 @@ const HomePage = () => {
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1 }
+  };
+
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    try {
+      setIsSubmitting(true);
+      await axios.post('/api/subscribers', { 
+        email, 
+        source: 'newsletter' 
+      });
+      toast.success('Successfully subscribed to updates!');
+      setEmail('');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to subscribe');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -109,15 +133,18 @@ const HomePage = () => {
               <p className="text-brand-300 font-medium mb-10">Stay tuned for updates from Finfleet Academy.</p>
               
               <div className="max-w-md mx-auto">
-                <form className="flex flex-col sm:flex-row gap-3" onSubmit={(e) => e.preventDefault()}>
+                <form className="flex flex-col sm:flex-row gap-3" onSubmit={handleSubscribe}>
                   <input 
                     type="email" 
                     placeholder="Enter your email" 
                     className="flex-1 bg-slate-800/50 dark:bg-slate-950/50 border border-slate-700 focus:border-brand-500 text-white px-5 py-4 rounded-full outline-none transition-all placeholder:text-slate-500"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={isSubmitting}
                   />
-                  <button type="submit" className="bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold px-8 py-4 rounded-full hover:shadow-lg hover:shadow-brand-500/25 transition-all w-full sm:w-auto flex-shrink-0">
-                    Notify Me
+                  <button type="submit" disabled={isSubmitting} className="bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold px-8 py-4 rounded-full hover:shadow-lg hover:shadow-brand-500/25 transition-all w-full sm:w-auto flex-shrink-0 disabled:opacity-50">
+                    {isSubmitting ? 'Submitting...' : 'Notify Me'}
                   </button>
                 </form>
                 <p className="text-xs text-slate-400 mt-4">Be the first to access new features</p>

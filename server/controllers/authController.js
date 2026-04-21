@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import Notification from '../models/Notification.js';
+import Subscriber from '../models/Subscriber.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
@@ -36,6 +37,17 @@ export const registerUser = async (req, res) => {
         message: `Welcome to FinFleet Academy, ${user.name}! We're excited to help you master the markets.`
       });
 
+      // Add to subscribers automatically
+      try {
+        await Subscriber.findOneAndUpdate(
+          { email: user.email },
+          { $setOnInsert: { email: user.email, source: 'registration' } },
+          { upsert: true }
+        );
+      } catch (subErr) {
+        console.error('Error adding subscriber:', subErr);
+      }
+
       res.status(201).json({
         _id: user._id,
         name: user.name,
@@ -60,6 +72,17 @@ export const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
+      // Add to subscribers automatically if they aren't already
+      try {
+        await Subscriber.findOneAndUpdate(
+          { email: user.email },
+          { $setOnInsert: { email: user.email, source: 'login' } },
+          { upsert: true }
+        );
+      } catch (subErr) {
+        console.error('Error adding subscriber:', subErr);
+      }
+
       res.json({
         _id: user._id,
         name: user.name,
