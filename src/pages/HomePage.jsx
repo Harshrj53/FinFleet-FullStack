@@ -84,6 +84,49 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Coming Soon Section */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-800 dark:to-slate-900 rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl border border-slate-700 dark:border-slate-700">
+            {/* Glow effects */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full -mr-32 -mt-32 blur-3xl mix-blend-screen" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-success/10 rounded-full -ml-32 -mb-32 blur-3xl mix-blend-screen" />
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative z-10"
+            >
+              <div className="inline-flex items-center space-x-2 bg-slate-800/50 dark:bg-slate-950/50 px-4 py-2 rounded-full border border-slate-600 mb-8 backdrop-blur-sm">
+                <span className="text-xs font-bold text-brand-400 tracking-wider uppercase">🚀 NEW FEATURES COMING SOON</span>
+              </div>
+              
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Something Big is Coming</h2>
+              <p className="text-slate-300 text-lg md:text-xl mb-2 max-w-2xl mx-auto">
+                We're building powerful new features including AI tools, advanced trading insights, and new courses.
+              </p>
+              <p className="text-brand-300 font-medium mb-10">Stay tuned for updates from Finfleet Academy.</p>
+              
+              <div className="max-w-md mx-auto">
+                <form className="flex flex-col sm:flex-row gap-3" onSubmit={(e) => e.preventDefault()}>
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    className="flex-1 bg-slate-800/50 dark:bg-slate-950/50 border border-slate-700 focus:border-brand-500 text-white px-5 py-4 rounded-full outline-none transition-all placeholder:text-slate-500"
+                    required
+                  />
+                  <button type="submit" className="bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold px-8 py-4 rounded-full hover:shadow-lg hover:shadow-brand-500/25 transition-all w-full sm:w-auto flex-shrink-0">
+                    Notify Me
+                  </button>
+                </form>
+                <p className="text-xs text-slate-400 mt-4">Be the first to access new features</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-24 bg-slate-50 dark:bg-slate-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
