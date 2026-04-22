@@ -13,7 +13,6 @@ import LoginPage from './pages/auth/LoginPage';
 import SignupPage from './pages/auth/SignupPage';
 import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
-import FinorPage from './pages/FinorPage';
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/courses" element={<CoursesPage />} />
               <Route path="/pricing" element={<PricingPage />} />
-              <Route path="/finor" element={<FinorPage />} />
               <Route path="/chatbot" element={<ChatPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/dashboard" element={<Dashboard />} />

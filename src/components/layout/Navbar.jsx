@@ -16,7 +16,6 @@ const Navbar = () => {
     { name: 'Academy', path: '/courses' },
     { name: 'Pricing', path: '/pricing' },
     { name: 'Market', path: '/#features' },
-    { name: 'Finor', path: '/finor' },
     { name: 'AI Chatbot', path: '/chatbot' },
   ];
 
