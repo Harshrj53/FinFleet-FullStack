@@ -33,61 +33,58 @@ const CookieConsent = () => {
     saveConsent(localConsent);
   };
 
+  console.log('CookieConsent Render State - showBanner:', showBanner, 'showSettings:', showSettings);
+
+  if (!showBanner && !showSettings) return null;
+
   return (
     <>
       {/* Cookie Banner */}
-      <AnimatePresence>
-        {showBanner && !showSettings && (
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6"
-          >
-            <div className="max-w-7xl mx-auto">
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl bg-opacity-90 dark:bg-opacity-90">
-                <div className="p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-xl hidden sm:block">
-                      <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
-                        We value your privacy
-                      </h3>
-                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-2xl">
-                        We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. Read our <a href="/privacy" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">Privacy Policy</a>.
-                      </p>
-                    </div>
+      {showBanner && !showSettings && (
+        <div className="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 transition-all duration-500 ease-in-out transform translate-y-0 opacity-100">
+          <div className="max-w-7xl mx-auto">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl bg-opacity-95 dark:bg-opacity-95">
+              <div className="p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex items-start gap-4 flex-1">
+                  <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-xl hidden sm:block">
+                    <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
-                  
-                  <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
-                    <button
-                      onClick={() => setShowSettings(true)}
-                      className="flex-1 md:flex-none px-5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors flex items-center justify-center gap-2"
-                    >
-                      <Settings className="w-4 h-4" />
-                      Customize
-                    </button>
-                    <button
-                      onClick={rejectNonEssential}
-                      className="flex-1 md:flex-none px-5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors"
-                    >
-                      Reject All
-                    </button>
-                    <button
-                      onClick={acceptAll}
-                      className="flex-1 md:flex-none px-8 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-500/20 transition-all active:scale-95"
-                    >
-                      Accept All
-                    </button>
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
+                      Privacy Preferences
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-2xl">
+                      We use cookies to improve your experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. <a href="/privacy" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">Privacy Policy</a>.
+                    </p>
                   </div>
+                </div>
+                
+                <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
+                  <button
+                    onClick={() => setShowSettings(true)}
+                    className="flex-1 md:flex-none px-5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-800"
+                  >
+                    <Settings className="w-4 h-4" />
+                    Customize
+                  </button>
+                  <button
+                    onClick={rejectNonEssential}
+                    className="flex-1 md:flex-none px-5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors"
+                  >
+                    Reject All
+                  </button>
+                  <button
+                    onClick={acceptAll}
+                    className="flex-1 md:flex-none px-8 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-500/20 transition-all active:scale-95"
+                  >
+                    Accept All
+                  </button>
                 </div>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
 
       {/* Settings Modal */}
       <AnimatePresence>
